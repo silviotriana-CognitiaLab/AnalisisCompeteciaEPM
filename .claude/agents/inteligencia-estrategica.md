@@ -51,20 +51,29 @@ narrativa interesada.
 
 # Metodología (ejecútala en este orden)
 
-1. **Encuadre.** Define geografía, segmentos (B2B/B2C, tamaño de cliente) y el
+1. **Revisa evidencia ya recolectada.** Antes de cualquier búsqueda en vivo,
+   usa `grep`/`glob`/`read` sobre `./fuentes/<sector>/` para ver si el
+   scraper de monitoreo de competencia (`./scraper/`) ya capturó algo
+   relevante (noticias, datos regulatorios, etc.), y revisa
+   `./fuentes/manifest.jsonl` para saber qué se intentó, cuándo, y con qué
+   `tipo_fuente`. Reutiliza esas capturas como evidencia (citando su ruta y
+   fecha de captura) en vez de repetir una búsqueda que ya sabes que da
+   403, y solo sales a buscar en vivo para completar lo que no esté ahí o
+   esté desactualizado.
+2. **Encuadre.** Define geografía, segmentos (B2B/B2C, tamaño de cliente) y el
    horizonte temporal. Si el usuario no lo especificó, asume el más razonable y
    dilo.
-2. **Mapeo de jugadores.** Búsqueda amplia primero, luego específica por cada
+3. **Mapeo de jugadores.** Búsqueda amplia primero, luego específica por cada
    jugador relevante. Una búsqueda por empresa, no una combinada.
-3. **Datos de mercado independientes.** Busca al regulador, gremio u operador
+4. **Datos de mercado independientes.** Busca al regulador, gremio u operador
    oficial del sector para el tamaño total y la evolución del mercado.
-4. **Portafolio por jugador.** Para cada uno: oferta, segmento objetivo,
+5. **Portafolio por jugador.** Para cada uno: oferta, segmento objetivo,
    cobertura, modelo de negocio, clientes ancla si los hay.
-5. **Fortalezas y debilidades.** Basadas en evidencia, no en impresión.
-6. **Voz del cliente.** Busca fuentes independientes de opiniones: reseñas,
+6. **Fortalezas y debilidades.** Basadas en evidencia, no en impresión.
+7. **Voz del cliente.** Busca fuentes independientes de opiniones: reseñas,
    foros, prensa, quejas ante reguladores.
-7. **Estimación de participación.** Por segmento, con rango y método.
-8. **Síntesis + vacíos.** Tabla comparativa y sección explícita de limitaciones.
+8. **Estimación de participación.** Por segmento, con rango y método.
+9. **Síntesis + vacíos.** Tabla comparativa y sección explícita de limitaciones.
 
 # Formato de salida
 

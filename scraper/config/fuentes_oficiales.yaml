@@ -1,0 +1,96 @@
+# Fuentes independientes/oficiales por tipo de dato.
+# tipo_fuente aquí es casi siempre "independiente" (regulador, gremio, dato
+# abierto). Se marca "autorreportado" solo si la fuente es la propia empresa.
+#
+# metodo:
+#   http_api    -> endpoint estructurado (JSON/CSV), sin necesidad de navegador
+#   http_simple -> HTML servido sin bloqueo anti-bot conocido
+#   headless    -> requiere navegador (Playwright) por JS o bloqueo de user-agent
+
+regulacion:
+  - id: xm_paratec
+    nombre: "XM - Portal BI / Paratec (generación por agente, capacidad instalada)"
+    tipo_fuente: independiente
+    url: "https://www.xm.com.co"
+    metodo: headless
+    notas: "En el informe previo, WebFetch a xm.com.co fue posible solo vía síntesis de búsqueda; confirmar si tiene API pública antes de asumir headless."
+
+  - id: sui_superservicios
+    nombre: "SUI - Sistema Único de Información de Servicios Públicos"
+    tipo_fuente: independiente
+    url: "https://www.sui.gov.co"
+    metodo: headless
+    notas: "Fuente clave para número total de usuarios por empresa/departamento (no accedida en el informe previo)."
+
+  - id: superservicios_boletines
+    nombre: "Superservicios - Boletines tarifarios y de PQR"
+    tipo_fuente: independiente
+    url: "https://www.superservicios.gov.co"
+    metodo: headless
+    notas: "Los PDF de este dominio dieron 403 en el informe previo con WebFetch; probar con navegador headless real."
+
+  - id: datos_abiertos_pqr
+    nombre: "Datos Abiertos Colombia - Superservicios - Reclamaciones y Quejas Inf. PQR"
+    tipo_fuente: independiente
+    url: "https://www.datos.gov.co"
+    metodo: http_api
+    resource_id: "5wua-nr2d"
+    notas: >
+      Dataset general (categoría "Minas y Energía" del portal): cantidad de
+      peticiones/quejas/reclamos registrados por empresa, causas, trámite,
+      respuesta, departamento, municipio y periodo. Verificado por
+      WebSearch en https://www.datos.gov.co/en/Minas-y-Energ-a/Superservicios-Reclamaciones-y-Quejas-Inf-PQR/5wua-nr2d
+      (no se pudo confirmar el JSON crudo vía WebFetch/curl: este entorno
+      bloquea la salida a datos.gov.co también para WebFetch, no solo para
+      Bash — validar el esquema real de columnas la primera vez que se
+      corra el collector fuera de este sandbox). Como es un dataset
+      general y no por sector, applica a todos los sectores (sin campo
+      `sectores`, ver abajo los datasets sí acotados por sector).
+
+  - id: datos_abiertos_pqr_energia
+    nombre: "Datos Abiertos Colombia - Superservicios - Reclamaciones y Quejas Energía"
+    tipo_fuente: independiente
+    url: "https://www.datos.gov.co"
+    metodo: http_api
+    resource_id: "myu9-6wb7"
+    sectores: [energia_electrica]
+    notas: >
+      Variante específica del sector energía del mismo tipo de dataset
+      (última actualización reportada por el buscador: sep. 2023 —
+      confirmar si sigue actualizándose). Fuente:
+      https://www.datos.gov.co/Minas-y-Energ-a/Superservicios-Reclamaciones-y-Quejas-Energia/myu9-6wb7
+
+  - id: datos_abiertos_pqr_gas
+    nombre: "Datos Abiertos Colombia - Superservicios - Reclamaciones y Quejas PQR Gas por Redes"
+    tipo_fuente: independiente
+    url: "https://www.datos.gov.co"
+    metodo: http_api
+    resource_id: "xueb-ib76"
+    sectores: [gas_natural]
+    notas: >
+      Variante específica de gas por redes (última actualización reportada
+      por el buscador: may. 2023 — confirmar vigencia). Fuente:
+      https://www.datos.gov.co/Minas-y-Energ-a/Superservicios-Reclamaciones-y-Quejas-Informaci-n-/xueb-ib76
+
+  - id: creg
+    nombre: "CREG - Comisión de Regulación de Energía y Gas"
+    tipo_fuente: independiente
+    url: "https://www.creg.gov.co"
+    metodo: headless
+
+  - id: upme
+    nombre: "UPME - Unidad de Planeación Minero Energética (Plan de Expansión de Generación)"
+    tipo_fuente: independiente
+    url: "https://www.upme.gov.co"
+    metodo: headless
+
+expansion_negocio:
+  - id: secop_ii
+    nombre: "SECOP II - contratación pública (licitaciones de alumbrado, agua, etc.)"
+    tipo_fuente: independiente
+    url: "https://www.colombiacompra.gov.co"
+    metodo: http_api
+    notas: >
+      SECOP II expone datasets en Socrata vía datos.gov.co
+      (dataset 'SECOP II - Procesos de Contratación'). Preferir esa API
+      sobre scraping del portal transaccional.
