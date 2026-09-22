@@ -37,6 +37,10 @@ class FuenteOficial:
     metodo: str
     notas: str = ""
     resource_id: str | None = None
+    sectores: list[str] | None = None  # None = aplica a todos los sectores
+
+    def aplica_a(self, sector_id: str) -> bool:
+        return self.sectores is None or sector_id in self.sectores
 
 
 def cargar_sectores() -> dict[str, Sector]:

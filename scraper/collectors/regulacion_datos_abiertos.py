@@ -23,7 +23,7 @@ def run(sector_id: str) -> list[EntradaManifest]:
     fuentes = cargar_fuentes_oficiales().get("regulacion", [])
 
     for fuente in fuentes:
-        if fuente.metodo != "http_api":
+        if fuente.metodo != "http_api" or not fuente.aplica_a(sector_id):
             continue
 
         resource_id = getattr(fuente, "resource_id", None)
