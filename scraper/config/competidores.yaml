@@ -1,0 +1,142 @@
+# Registro de competidores por sector.
+#
+# confianza:
+#   alta   -> verificado en el informe existente (./informes/) o fuente reciente sólida
+#   media  -> conocimiento general razonable, sin verificación reciente en este repo
+#   baja   -> mención plausible, requiere validación antes de citarse en un informe
+#   completar -> placeholder puesto por el diseño del proyecto; el usuario debe
+#                completar/corregir con su conocimiento del sector antes de usarlo
+#
+# sala_prensa / ir: URLs semilla para el collector de noticias (headless).
+# Deja la lista vacía y usa el buscador (WebSearch, vía el subagente
+# inteligencia-estrategica) mientras no se validen URLs concretas.
+
+energia_electrica:
+  - id: epm
+    nombre: "EPM (Grupo EPM)"
+    confianza: alta
+    sitio: "https://www.epm.com.co"
+    notas: "Empresa propia (referencia, no competidor)."
+  - id: celsia
+    nombre: "Celsia (Grupo Argos)"
+    confianza: alta
+    sitio: "https://www.celsia.com"
+  - id: isagen
+    nombre: "Isagen (Brookfield)"
+    confianza: alta
+    sitio: "https://www.isagen.com.co"
+  - id: enel_codensa
+    nombre: "Enel Colombia (Emgesa / Codensa)"
+    confianza: alta
+    sitio: "https://www.enel.com.co"
+  - id: aes_colombia
+    nombre: "AES Colombia"
+    confianza: alta
+    sitio: "https://www.aescolombia.com"
+  - id: btg_comercializadora
+    nombre: "BTG Pactual Comercializadora de Energía"
+    confianza: media
+    sitio: ""
+    notas: "Líder en ingresos de comercialización 2025 según prensa citando Superservicios; sin verificación primaria."
+  - id: vatia
+    nombre: "Vatia S.A. E.S.P."
+    confianza: media
+    sitio: "https://www.vatia.com.co"
+
+gas_natural:
+  - id: vanti
+    nombre: "Vanti (antes Gas Natural Fenosa)"
+    confianza: media
+    sitio: "https://www.vanti.co"
+    notas: "Distribuidor dominante en Bogotá-Cundinamarca. Verificar estructura societaria vigente."
+  - id: promigas_grupo
+    nombre: "Grupo Promigas (Gases del Caribe, Gases de Occidente, Surtigas)"
+    confianza: media
+    sitio: "https://www.promigas.com"
+    notas: "Verificar cuáles distribuidoras regionales pertenecen hoy al grupo."
+  - id: efigas
+    nombre: "Efigas"
+    confianza: baja
+    sitio: "https://www.efigas.com.co"
+    notas: "Verificar si actualmente hace parte de Grupo EPM (posible relación EPM–competidor a aclarar)."
+  - id: alcanos
+    nombre: "Alcanos de Colombia"
+    confianza: baja
+    sitio: ""
+    notas: "Distribuidor en Meta/Casanare; validar vigencia y cobertura actual."
+
+agua_saneamiento_aseo:
+  - id: acueducto_bogota
+    nombre: "EAAB - Acueducto de Bogotá"
+    confianza: alta
+    sitio: "https://www.acueducto.com.co"
+  - id: triple_a
+    nombre: "Triple A (Barranquilla)"
+    confianza: media
+    sitio: "https://www.triplea.com.co"
+  - id: acuacar
+    nombre: "Aguas de Cartagena (Acuacar)"
+    confianza: media
+    sitio: "https://www.acuacar.com"
+  - id: empresas_varias_medellin
+    nombre: "Empresas Varias de Medellín (EVM, Grupo EPM - aseo)"
+    confianza: alta
+    sitio: "https://www.eevvm.com"
+    notas: "Es del propio Grupo EPM; útil como referencia interna, no competidor."
+  - id: veolia_colombia
+    nombre: "Veolia Colombia (aseo/aguas)"
+    confianza: baja
+    sitio: ""
+
+generacion_solar_ppa_epc:
+  - id: celsia_solar
+    nombre: "Celsia Solar / Celsia EaaS (Atera con Brookfield)"
+    confianza: media
+    sitio: "https://www.celsia.com"
+  - id: enel_x
+    nombre: "Enel X Colombia"
+    confianza: baja
+    sitio: ""
+    notas: "Verificar si Enel X sigue operando como marca separada en Colombia."
+  - id: greenyellow
+    nombre: "GreenYellow Colombia"
+    confianza: baja
+    sitio: ""
+    notas: "Jugador reportado en solar C&I bajo PPA/EPC en Latam; confirmar presencia y escala en Colombia."
+  - id: atlas_renewable
+    nombre: "Atlas Renewable Energy"
+    confianza: baja
+    sitio: ""
+    notas: "Más enfocado en proyectos de gran escala/utility PPA que en techos C&I; confirmar segmento real."
+  - id: completar_1
+    nombre: "COMPLETAR: jugador local de EPC solar C&I"
+    confianza: completar
+    sitio: ""
+    notas: "El usuario conoce mejor este nicho; agregar nombres reales antes de correr el collector."
+
+alumbrado_publico:
+  - id: completar_1
+    nombre: "COMPLETAR: concesionario/operador de alumbrado público"
+    confianza: completar
+    sitio: ""
+    notas: >
+      No se listan nombres por defecto para evitar afirmar jugadores no
+      verificados en un mercado que varía mucho por municipio y depende de
+      licitaciones SECOP vigentes. Completar con los operadores conocidos
+      en las ciudades de interés (p.ej. concesionario de alumbrado de
+      Bogotá, Medellín, etc.) y dejar que el collector de expansion_negocio
+      (SECOP) descubra nuevos entrantes por licitación.
+
+alumbrado_navideno:
+  - id: completar_1
+    nombre: "COMPLETAR: empresa de alumbrado navideño"
+    confianza: completar
+    sitio: ""
+    notas: "Igual razón que alumbrado_publico. Altamente estacional: revisar SECOP jul-oct."
+
+alumbrado_arquitectonico:
+  - id: completar_1
+    nombre: "COMPLETAR: empresa de iluminación arquitectónica"
+    confianza: completar
+    sitio: ""
+    notas: "Nicho pequeño y poco documentado en prensa abierta; validar manualmente."

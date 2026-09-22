@@ -1,0 +1,56 @@
+# Líneas de negocio de EPM a monitorear y los tipos de dato que aplican a cada una.
+# tipos_dato válidos: regulacion, noticias, percepcion_cliente, expansion_negocio
+# (deben existir como coleccionistas en scraper/collectors/)
+
+sectores:
+  energia_electrica:
+    nombre: "Energía eléctrica"
+    descripcion: >
+      Generación, distribución y comercialización de energía (regulado B2C y
+      no regulado B2B). Ya existe un informe base en ./informes/.
+    tipos_dato: [regulacion, noticias, percepcion_cliente, expansion_negocio]
+
+  gas_natural:
+    nombre: "Gas natural"
+    descripcion: "Distribución y comercialización de gas natural domiciliario e industrial."
+    tipos_dato: [regulacion, noticias, percepcion_cliente, expansion_negocio]
+
+  agua_saneamiento_aseo:
+    nombre: "Agua, saneamiento y aseo"
+    descripcion: >
+      Acueducto, alcantarillado y aseo. Ya existe un informe base en ./informes/.
+    tipos_dato: [regulacion, noticias, percepcion_cliente, expansion_negocio]
+
+  generacion_solar_ppa_epc:
+    nombre: "Generación solar distribuida (modelos PPA y EPC)"
+    descripcion: >
+      Negocio NO regulado: soluciones solares en sitio para clientes
+      industriales/comerciales bajo contratos PPA (compra de energía a largo
+      plazo, EPM no es dueña del activo... o sí, según el modelo) o EPC
+      (EPM/competidor construye y entrega la planta al cliente). Mercado más
+      fragmentado y con menos reguladores publicando cifras de cuota.
+    tipos_dato: [noticias, percepcion_cliente, expansion_negocio]
+
+  alumbrado_publico:
+    nombre: "Alumbrado público"
+    descripcion: >
+      Concesiones/contratos de operación, mantenimiento y modernización
+      (LED) de alumbrado público municipal. Mercado de contratación pública:
+      SECOP es la fuente más relevante para expansión_negocio.
+    tipos_dato: [noticias, expansion_negocio]
+
+  alumbrado_navideno:
+    nombre: "Alumbrado navideño"
+    descripcion: >
+      Diseño, instalación y operación de alumbrados navideños municipales/
+      corporativos (temporada oct-ene). Muy estacional: la mayoría de
+      señales de negocio salen en licitaciones SECOP entre jul-oct.
+    tipos_dato: [noticias, expansion_negocio]
+
+  alumbrado_arquitectonico:
+    nombre: "Alumbrado arquitectónico"
+    descripcion: >
+      Iluminación decorativa/arquitectónica permanente de edificios, puentes
+      y espacio público (marca ciudad). Nicho pequeño, pocos jugadores
+      documentados en prensa; depende mucho de validación manual.
+    tipos_dato: [noticias, expansion_negocio]
