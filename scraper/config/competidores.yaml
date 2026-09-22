@@ -1,15 +1,21 @@
 # Registro de competidores por sector.
 #
 # confianza:
-#   alta   -> verificado en el informe existente (./informes/) o fuente reciente sólida
-#   media  -> conocimiento general razonable, sin verificación reciente en este repo
-#   baja   -> mención plausible, requiere validación antes de citarse en un informe
-#   completar -> placeholder puesto por el diseño del proyecto; el usuario debe
-#                completar/corregir con su conocimiento del sector antes de usarlo
+#   alta   -> verificado en el informe existente (./informes/) o con fuente
+#             de prensa/comunicado independiente sólido encontrado en esta sesión
+#   media  -> fuente encontrada, pero de un solo medio o con vigencia a confirmar
+#             (contratos/concesiones que pueden haber cambiado de manos)
+#   baja   -> solo aparece en el propio sitio de la empresa o en contenido
+#             de marketing de OTRO competidor (nunca tratar como independiente);
+#             requiere validación antes de citarse en un informe
+#   completar -> placeholder puesto por el diseño del proyecto; ya no debería
+#                quedar ninguno en este archivo (ver historial de commits si
+#                aparece uno nuevo al agregar un sector)
 #
-# sala_prensa / ir: URLs semilla para el collector de noticias (headless).
+# fuentes_noticias: URLs semilla para el collector de noticias (headless).
 # Deja la lista vacía y usa el buscador (WebSearch, vía el subagente
-# inteligencia-estrategica) mientras no se validen URLs concretas.
+# inteligencia-estrategica) mientras no se validen URLs concretas de sala
+# de prensa por competidor.
 
 energia_electrica:
   - id: epm
@@ -100,43 +106,188 @@ generacion_solar_ppa_epc:
     notas: "Verificar si Enel X sigue operando como marca separada en Colombia."
   - id: greenyellow
     nombre: "GreenYellow Colombia"
-    confianza: baja
-    sitio: ""
-    notas: "Jugador reportado en solar C&I bajo PPA/EPC en Latam; confirmar presencia y escala en Colombia."
+    confianza: alta
+    sitio: "https://greenyellow.co"
+    notas: >
+      Verificado con prensa independiente (Portafolio, PV Magazine
+      Latinoamérica) y comunicados propios: opera bajo modelo PPA (parque
+      solar "Jardín", 14,55 MWp en Valencia de Jesús, Cesar) y bajo
+      EPC/autogeneración C&I (planta de 1,45 MWp para Cerámica Industrial
+      del Meta - CIMET, Acacias). También reporta proyectos de generación
+      distribuida en el Atlántico. Confianza alta en "existe y opera
+      activamente en Colombia en PPA/EPC C&I"; las cifras exactas de
+      capacidad siguen siendo autorreportadas por GreenYellow.
   - id: atlas_renewable
     nombre: "Atlas Renewable Energy"
     confianza: baja
     sitio: ""
     notas: "Más enfocado en proyectos de gran escala/utility PPA que en techos C&I; confirmar segmento real."
-  - id: completar_1
-    nombre: "COMPLETAR: jugador local de EPC solar C&I"
-    confianza: completar
-    sitio: ""
-    notas: "El usuario conoce mejor este nicho; agregar nombres reales antes de correr el collector."
-
-alumbrado_publico:
-  - id: completar_1
-    nombre: "COMPLETAR: concesionario/operador de alumbrado público"
-    confianza: completar
+  - id: erco_energia
+    nombre: "Erco Energía"
+    confianza: alta
+    sitio: "https://erco.energy/co"
+    notas: >
+      Empresa paisa (Medellín, fundada 2012), solar residencial y C&I;
+      cerró ronda Serie C de USD 129 millones co-liderada por Next Utility
+      Ventures, el fondo de capital de riesgo de Ventures EPM — es decir,
+      EPM (a través de su propio vehículo de inversión) es inversionista
+      de un competidor de generación solar distribuida, dato relevante
+      para el análisis. Fuente independiente: Finance Colombia, El
+      Colombiano, perfil corporativo en LinkedIn/Crunchbase/EMIS. La cifra
+      de "36,4% de participación de mercado" que Erco publica en su propio
+      blog (erco.energy) es AUTORREPORTADA por Erco sobre sí misma — no se
+      presenta como hecho independiente.
+  - id: metalenergy
+    nombre: "Metalenergy"
+    confianza: baja
+    sitio: "https://metalenergy.co"
+    notas: >
+      Ofrece modelos EPC (cliente dueño del activo) y PPA (sin inversión
+      inicial) para C&I, según su propio sitio. No se encontró cobertura
+      de prensa independiente que lo confirme; validar antes de citarlo en
+      un informe.
+  - id: emergente_energia
+    nombre: "Emergente Energía"
+    confianza: baja
     sitio: ""
     notas: >
-      No se listan nombres por defecto para evitar afirmar jugadores no
-      verificados en un mercado que varía mucho por municipio y depende de
-      licitaciones SECOP vigentes. Completar con los operadores conocidos
-      en las ciudades de interés (p.ej. concesionario de alumbrado de
-      Bogotá, Medellín, etc.) y dejar que el collector de expansion_negocio
-      (SECOP) descubra nuevos entrantes por licitación.
+      Descrito (proyectos industriales en minería/petroquímica/
+      manufactura pesada, ~900 instalaciones en 7 años) SOLO en el blog de
+      un competidor (erco.energy) que se autopromociona como líder del
+      ranking — es contenido de marketing de Erco Energía comparándose con
+      otros, no fuente independiente. Validar con fuente propia antes de
+      usar.
+  - id: autosolar
+    nombre: "AutoSolar"
+    confianza: baja
+    sitio: ""
+    notas: >
+      Mismo origen que emergente_energia: solo aparece caracterizada
+      (distribuidor de equipos + EPC para 20-100 kWp) en el blog de un
+      competidor (erco.energy). Validar con fuente propia.
+
+alumbrado_publico:
+  # Es un mercado de concesiones municipales: no hay un jugador nacional
+  # único, y los contratos cambian de manos con cada licitación. Antes de
+  # citar cualquiera de estas entradas en un informe, confirmar vigencia
+  # actual del contrato (varias fuentes de abajo mencionan procesos de
+  # cambio de operador en curso).
+  - id: barranquilla_capital_de_luz
+    nombre: >
+      Barranquilla Capital de Luz (consorcio: Eléctricas de Medellín
+      Ingeniería y Servicios S.A.S., Iluminación de Villavicencio S.A.S.,
+      Celsa S.A.S.)
+    confianza: media
+    sitio: ""
+    notas: >
+      Socio privado seleccionado por convocatoria pública para el
+      alumbrado público de Barranquilla, según La Silla Vacía. Verificar
+      vigencia actual del contrato antes de citarlo.
+  - id: iluminemos_cartagena
+    nombre: "Iluminemos Cartagena (Electroconstrucciones + ISM SA)"
+    confianza: baja
+    sitio: ""
+    notas: >
+      Operador privado del alumbrado público de Cartagena desde 1998
+      según La Contratopedia Caribe, pero el mismo medio reporta que el
+      Distrito asumió la operación de forma temporal más recientemente —
+      CONFIRMAR si Iluminemos Cartagena sigue vigente o ya cambió de
+      operador antes de usarlo en un informe.
+  - id: megaproyectos_iluminaciones
+    nombre: "Megaproyectos de Iluminaciones (Cali)"
+    confianza: baja
+    sitio: ""
+    notas: >
+      Concesionario del alumbrado público de Cali durante 24 años desde
+      el año 2000, según El Tiempo, pero el mismo artículo indica que Cali
+      está evaluando alternativas al terminar esa concesión — CONFIRMAR si
+      sigue vigente.
+  - id: agm_desarrollos
+    nombre: "AGM Desarrollos S.A.S. (Aguachica, Cesar)"
+    confianza: media
+    sitio: ""
+    notas: >
+      Concesionario del alumbrado público de Aguachica, bajo investigación
+      preliminar de la Procuraduría (enero 2026) por presunto sobrecosto
+      en el contrato de alumbrado navideño de la misma concesión — ver
+      también alumbrado_navideno.
 
 alumbrado_navideno:
-  - id: completar_1
-    nombre: "COMPLETAR: empresa de alumbrado navideño"
-    confianza: completar
+  # Mercado muy fragmentado y local: cada alcaldía licita por separado y el
+  # adjudicatario cambia cada año, a veces sin relación con el mercado de
+  # alumbrado_publico permanente (ver caso Sabaneta-Bucaramanga: una
+  # empresa de servicios públicos de OTRA ciudad ganó el contrato). Antes
+  # de cada temporada (jul-oct) conviene correr el collector de
+  # expansion_negocio sobre SECOP en vez de asumir que el mismo jugador se
+  # repite.
+  - id: sabaneta_esp_bucaramanga
+    nombre: "Empresa de Servicios Públicos Domiciliarios de Sabaneta (Antioquia)"
+    confianza: media
     sitio: ""
-    notas: "Igual razón que alumbrado_publico. Altamente estacional: revisar SECOP jul-oct."
+    notas: >
+      Adjudicataria directa (sin proceso de selección competitivo) del
+      contrato de alumbrado navideño 2025 de Bucaramanga (~$7.000 millones
+      COP, contrato 255/2024), bajo investigación de la Contraloría y la
+      Procuraduría por presuntas irregularidades. Subcontrató la
+      instalación real a Civacom Ingeniería S.A.S. Fuentes: El Tiempo,
+      Vanguardia, Infobae, BluRadio (dic. 2025 - ene. 2026).
+  - id: civacom_ingenieria
+    nombre: "Civacom Ingeniería S.A.S. (Bucaramanga)"
+    confianza: media
+    sitio: ""
+    notas: >
+      Subcontratista que ejecutó realmente la instalación del alumbrado
+      navideño 2025 de Bucaramanga (~$6.271 millones COP), tras ser
+      subcontratado por sabaneta_esp_bucaramanga. Ver esa entrada.
+  - id: agm_desarrollos
+    nombre: "AGM Desarrollos S.A.S. (Aguachica, Cesar)"
+    confianza: media
+    sitio: ""
+    notas: >
+      Concesionario de alumbrado público de Aguachica al que se le pagaron
+      ~$2.400 millones COP por el alumbrado navideño 2025 (solo para la
+      plaza principal y el parque San Roque), bajo investigación
+      preliminar de la Procuraduría por presunto sobrecosto (Infobae,
+      ene. 2026). Ver también alumbrado_publico.
+  - id: epm_medellin_referencia
+    nombre: "EPM / Municipio de Medellín (alumbrado navideño de Medellín)"
+    confianza: alta
+    sitio: ""
+    notas: >
+      Es la propia EPM, no un competidor: referencia de escala (8 millones
+      de luces LED en la temporada 2025-2026, encendido 28 nov. 2025) para
+      comparar contra los contratos, presupuestos y controversias de otras
+      ciudades. Fuente: Infobae, nov. 2025.
 
 alumbrado_arquitectonico:
-  - id: completar_1
-    nombre: "COMPLETAR: empresa de iluminación arquitectónica"
-    confianza: completar
-    sitio: ""
-    notas: "Nicho pequeño y poco documentado en prensa abierta; validar manualmente."
+  - id: enel_codensa_iluminacion
+    nombre: "Enel-Codensa - servicio de Iluminación Arquitectónica"
+    confianza: media
+    sitio: "https://www.codensa.com.co/empresas/productos-y-servicios/iluminacion-arquitectonica"
+    notas: >
+      Codensa (Enel Colombia) ofrece iluminación arquitectónica como
+      servicio B2B/institucional (diseño, renders, instalación, estudios
+      fotométricos, opción de renting) para fachadas, centros comerciales,
+      iglesias y monumentos — competencia directa si EPM ofreciera un
+      servicio equivalente en su territorio. Fuente: sitio propio de
+      Codensa/Enel X (autorreportado, tratar como tal).
+  - id: colombia_leds
+    nombre: "Colombia LEDs"
+    confianza: baja
+    sitio: "https://www.colombialeds.com"
+    notas: >
+      Equipo de arquitectos/diseñadores/ingenieros en iluminación LED
+      arquitectónica, según su propio sitio. Sin cobertura de prensa
+      independiente encontrada; validar antes de citarlo.
+  - id: prisma_ingenieria
+    nombre: "Prisma Ingeniería"
+    confianza: baja
+    sitio: "https://www.prismaingenieria.com.co"
+    notas: "Ofrece iluminación de fachadas según su propio sitio. Sin verificación independiente encontrada; validar."
+  - id: proyectos_visibles
+    nombre: "Proyectos Visibles"
+    confianza: baja
+    sitio: "https://www.proyectosvisibles.com"
+    notas: >
+      Iluminación LED arquitectónica en Bogotá/Medellín, según su propio
+      sitio. Sin verificación independiente encontrada; validar.
